@@ -1,9 +1,13 @@
+
 package mvc.model;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Observable;
 
-public class Model {
+public class Model extends Observable {
+
     MyShape currentShape;
 
     public Model() {
@@ -12,10 +16,15 @@ public class Model {
     public void setMyShape(MyShape myShape) {
         this.currentShape = myShape;
     }
-    public void changeShape(Point2D[] dotsArray){
-        currentShape.setFrame(dotsArray);
+
+    public void changeShape(Point2D[] pd) {
+        currentShape.setFrame(pd);
+        this.setChanged();
+        this.notifyObservers();
     }
-    public void draw(Graphics2D g){
+
+    public void draw(Graphics2D g) {
         currentShape.draw(g);
     }
+
 }
