@@ -32,6 +32,7 @@ public class Controller {
     }
     public void getPointOne(Point2D p){
         pointsArray[0] = p;
+        model.initCurrentShape();
     }
     public void getPointTwo(Point2D p){
         pointsArray[1] = p;

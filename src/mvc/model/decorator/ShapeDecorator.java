@@ -14,4 +14,5 @@ public interface ShapeDecorator {
     void setFrame(Point2D[] p);
 
     RectangularShape getShape();
+    ShapeDecorator clone();
 }

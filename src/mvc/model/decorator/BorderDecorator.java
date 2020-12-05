@@ -36,8 +36,9 @@ public class BorderDecorator implements ShapeDecorator {
         return  shape.getShape();
     }
 
+    @Override
     public ShapeDecorator clone() {
-        BorderDecorator bd = new BorderDecorator(shape);
+        BorderDecorator bd = new BorderDecorator(shape.clone());
         bd.borderWidth = borderWidth;
         return bd;
     }

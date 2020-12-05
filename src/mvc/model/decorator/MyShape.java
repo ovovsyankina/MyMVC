@@ -64,6 +64,17 @@ public class MyShape implements ShapeDecorator {
         return shape;
     }
 
+    @Override
+    public ShapeDecorator clone() {
+        ShapeDecorator s = new MyShape();
+        RectangularShape s1 = (RectangularShape) shape.clone();
+        s.setColor(color);
+        s.setShape(s1);
+        ((MyShape)s).fb = this.fb;
+        return s;
+    }
+
+
     public enum FillBehavior {
         FILL {
             @Override
