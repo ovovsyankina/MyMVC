@@ -1,13 +1,15 @@
 package mvc.Controller;
 
 import mvc.model.Model;
-import mvc.model.MyShape;
+import mvc.model.decorator.MyShape;
+import mvc.model.decorator.ShapeDecorator;
 import java.awt.Color;
 import java.awt.geom.RectangularShape;
+import mvc.model.decorator.BorderDecorator;
 
 public class State {
     Model model;
-    MyShape shape;
+    ShapeDecorator shape;
     Color color;
     MyShape.FillBehavior fb;
     RectangularShape rectangularShape;
@@ -18,6 +20,10 @@ public class State {
 
     public void setShape(MyShape shape) {
         this.shape = shape;
+    }
+
+    public ShapeDecorator getShape() {
+        return this.shape;
     }
 
     public void setColor(Color color) {
@@ -38,8 +44,16 @@ public class State {
         model.setMyShape(shape);
     }
 
-    public MyShape getShape() {
-        return shape;
+    public void Decor(ShapeDecorator shape, int p){
+        shape = new BorderDecorator(shape);
+        shape.setParametr(p);
+        shape = new BorderDecorator(shape);
+        shape.setParametr(p+20);
+        model.setMyShape(shape);
+    }
+
+    public void NoDecor(ShapeDecorator shape){
+        model.setMyShape(shape);
     }
 
 }

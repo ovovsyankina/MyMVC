@@ -1,7 +1,7 @@
 package mvc.view;
 
 import mvc.Controller.State;
-import mvc.model.MyShape;
+import mvc.model.decorator.MyShape;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +28,8 @@ public class MyFrame extends JFrame {
         bar.add(menuShape);
         JMenu menuColor = new JMenu("Color");
         bar.add(menuColor);
+        JMenu menuDecor = new JMenu("Decor");
+        bar.add(menuDecor);
         JMenuItem fillShape = new JMenuItem("Fill");
         JMenuItem noFillShape = new JMenuItem("NoFill");
         menuFB.add(fillShape);
@@ -48,6 +50,10 @@ public class MyFrame extends JFrame {
         menuColor.add(Yellow);
         menuColor.add(Black);
         menuColor.add(Magenta);
+        JMenuItem jMenuDecor = new JMenuItem("Decor");
+        JMenuItem jMenuNoDecor = new JMenuItem("NoDecor");
+        menuDecor.add(jMenuDecor);
+        menuDecor.add(jMenuNoDecor);
 
         //FB listeners
         fillShape.addActionListener(new ActionListener() {
@@ -110,6 +116,19 @@ public class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state.setColor(Color.magenta);
+            }
+        });
+        //Decorator listeners
+        jMenuDecor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                state.Decor(state.getShape(), 10);
+            }
+        });
+        jMenuNoDecor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                state.NoDecor(state.getShape());
             }
         });
         setDefaultCloseOperation(EXIT_ON_CLOSE);

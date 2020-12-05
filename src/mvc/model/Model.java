@@ -1,19 +1,19 @@
-
 package mvc.model;
+
+import mvc.model.decorator.ShapeDecorator;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.Observable;
 
 public class Model extends Observable {
 
-    MyShape currentShape;
+    ShapeDecorator currentShape;
 
     public Model() {
     }
 
-    public void setMyShape(MyShape myShape) {
+    public void setMyShape(ShapeDecorator myShape) {
         this.currentShape = myShape;
     }
 

@@ -1,4 +1,4 @@
-package mvc.model;
+package mvc.model.decorator;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 
-public class MyShape {
+public class MyShape implements ShapeDecorator {
 
     Color color;
     RectangularShape shape;
@@ -43,7 +43,7 @@ public class MyShape {
         shape.setFrameFromDiagonal(pd[0], pd[1]);
     }
 
-    void draw(Graphics2D g) {
+    public void draw(Graphics2D g) {
         fb.draw(g,color,shape);
     }
 
@@ -53,6 +53,15 @@ public class MyShape {
 
     public MyShape.FillBehavior getFb() {
         return fb;
+    }
+
+    @Override
+    public void setParametr(int p) {
+    }
+
+    @Override
+    public RectangularShape getShape() {
+        return shape;
     }
 
     public enum FillBehavior {
@@ -75,8 +84,5 @@ public class MyShape {
             }
         };
         public abstract void  draw(Graphics2D g, Color c, RectangularShape sh);
-
     }
-
-
 }

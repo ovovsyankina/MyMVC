@@ -3,9 +3,9 @@ package mvc.Controller;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Ellipse2D;
+
 import mvc.model.Model;
-import mvc.model.MyShape;
+import mvc.model.decorator.MyShape;
 import mvc.view.MyFrame;
 import mvc.view.MyPanel;
 import java.awt.Color;
