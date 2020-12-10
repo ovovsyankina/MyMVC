@@ -62,4 +62,9 @@ public class BorderDecorator implements ShapeDecorator {
     public void setFrame(Point2D[] p) {
         shape.setFrame(p);
     }
+
+    @Override
+    public boolean contains(Point2D p){
+        return shape.contains(p);
+    }
 }

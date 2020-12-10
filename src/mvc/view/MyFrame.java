@@ -1,6 +1,8 @@
 package mvc.view;
 
 import mvc.Controller.State;
+import mvc.model.activity.Draw;
+import mvc.model.activity.Move;
 import mvc.model.decorator.MyShape;
 
 import java.awt.*;
@@ -30,6 +32,8 @@ public class MyFrame extends JFrame {
         bar.add(menuColor);
         JMenu menuDecor = new JMenu("Decor");
         bar.add(menuDecor);
+        JMenu menuActiv = new JMenu("Activity");
+        bar.add(menuActiv);
         JMenuItem fillShape = new JMenuItem("Fill");
         JMenuItem noFillShape = new JMenuItem("NoFill");
         menuFB.add(fillShape);
@@ -54,6 +58,10 @@ public class MyFrame extends JFrame {
         JMenuItem jMenuNoDecor = new JMenuItem("NoDecor");
         menuDecor.add(jMenuDecor);
         menuDecor.add(jMenuNoDecor);
+        JMenuItem jMenuDraw = new JMenuItem("Draw");
+        JMenuItem jMenuMove = new JMenuItem("Move");
+        menuActiv.add(jMenuDraw);
+        menuActiv.add(jMenuMove);
 
         //FB listeners
         fillShape.addActionListener(new ActionListener() {
@@ -129,6 +137,19 @@ public class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 state.NoDecor(state.getShape());
+            }
+        });
+        //Activity listeners
+        jMenuDraw.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                state.setActivity(new Draw());
+            }
+        });
+        jMenuMove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                state.setActivity(new Move());
             }
         });
         setDefaultCloseOperation(EXIT_ON_CLOSE);

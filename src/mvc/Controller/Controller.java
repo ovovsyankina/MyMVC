@@ -5,7 +5,9 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import mvc.model.Model;
+import mvc.model.activity.Draw;
 import mvc.model.decorator.MyShape;
+import mvc.model.activity.Activity;
 import mvc.view.MyFrame;
 import mvc.view.MyPanel;
 import java.awt.Color;
@@ -23,6 +25,7 @@ public class Controller {
         state = new State(model);
         state.setShape(new MyShape(new Rectangle2D.Double()));
         state.setColor(Color.black);
+        state.setActivity(new Draw());
         panel = new MyPanel();
         panel.setController(this);
         model.addObserver(panel);
@@ -31,12 +34,11 @@ public class Controller {
         pointsArray = new Point2D[2];
     }
     public void getPointOne(Point2D p){
-        pointsArray[0] = p;
-        model.initCurrentShape();
+        Activity activity = state.getActivity();
+        activity.getPointOne(p);
     }
     public void getPointTwo(Point2D p){
-        pointsArray[1] = p;
-        model.changeShape(pointsArray);
+        state.getActivity().getPointTwo(p);
     }
 
     public void draw(Graphics2D g2) {

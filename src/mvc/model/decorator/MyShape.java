@@ -55,6 +55,10 @@ public class MyShape implements ShapeDecorator {
         return fb;
     }
 
+    public boolean contains(Point2D p){
+        return shape.contains(p);
+    }
+
     @Override
     public void setParametr(int p) {
     }

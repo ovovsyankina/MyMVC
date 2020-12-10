@@ -6,6 +6,7 @@ import mvc.model.decorator.ShapeDecorator;
 import java.awt.Color;
 import java.awt.geom.RectangularShape;
 import mvc.model.decorator.BorderDecorator;
+import mvc.model.activity.Activity;
 
 public class State {
     Model model;
@@ -13,6 +14,7 @@ public class State {
     Color color;
     MyShape.FillBehavior fb;
     RectangularShape rectangularShape;
+    Activity activity;
 
     public State(Model model) {
         this.model = model;
@@ -56,4 +58,12 @@ public class State {
         model.setMyShape(shape);
     }
 
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+        this.activity.setModel(model);
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
 }
