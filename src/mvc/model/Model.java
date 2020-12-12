@@ -5,8 +5,18 @@ import mvc.model.decorator.ShapeDecorator;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
-import java.util.Observable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Model extends Observable {
 
@@ -48,7 +58,7 @@ public class Model extends Observable {
                 if (s.contains(p1)) {
                     currentShape = s;
                     return currentShape;
-                };
+                }
             }
         }
         return null;
@@ -70,4 +80,47 @@ public class Model extends Observable {
         }
     }
 
+    public void shapeUndo() {
+        ShapeDecorator s = list.remove(list.size() - 1);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void shapeRedo(ShapeDecorator activeShape) {
+        this.currentShape = activeShape;
+        list.add(currentShape);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void reseverMove(ShapeDecorator shapeNew, Point2D[] oldP) {
+        shapeNew.setFrame(oldP);
+        currentShape = shapeNew;
+        setChanged();
+        notifyObservers();
+    }
+
+    public void save (File file) throws IOException {
+        FileWriter w = new FileWriter(file);
+        FileOutputStream fout = new FileOutputStream(file);
+        ObjectOutputStream out = new ObjectOutputStream(fout);
+        out.writeObject(list);
+        out.close();
+    }
+
+    public void open (File file) throws IOException {
+        try {
+            ObjectInputStream inputFile = new ObjectInputStream(new FileInputStream(file));
+            try {
+                list = (ArrayList<ShapeDecorator>) inputFile.readObject();
+                currentShape =list.get(list.size()-1);
+                setChanged();
+                notifyObservers();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

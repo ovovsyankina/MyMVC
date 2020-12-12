@@ -2,10 +2,12 @@ package mvc.model.decorator;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
+import java.io.Serializable;
 
-public class BorderDecorator implements ShapeDecorator {
+public class BorderDecorator implements ShapeDecorator, Serializable {
 
     ShapeDecorator shape;
     int borderWidth;
@@ -67,4 +69,8 @@ public class BorderDecorator implements ShapeDecorator {
     public boolean contains(Point2D p){
         return shape.contains(p);
     }
+
+    @Override
+    public void setLine(Line2D r){};
 }
+

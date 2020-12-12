@@ -1,159 +1,75 @@
 package mvc.view;
 
+import menu.*;
 import mvc.Controller.State;
 import mvc.model.activity.Draw;
 import mvc.model.activity.Move;
+import mvc.model.decorator.MyLine;
 import mvc.model.decorator.MyShape;
+import mvc.model.UndoMachine;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import java.util.ArrayList;
+import javax.swing.*;
 
 public class MyFrame extends JFrame {
 
     MyPanel panel;
     State state;
+    UndoMachine undoMachine;
 
-    public MyFrame(State state) {
+    public MyFrame(State state, UndoMachine undoMachine) {
         this.state = state;
+        this.undoMachine = undoMachine;
         JMenuBar bar = new JMenuBar();
         this.setJMenuBar(bar);
-        JMenu menuFB = new JMenu("FB");
-        bar.add(menuFB);
-        JMenu menuShape = new JMenu("Shape");
-        bar.add(menuShape);
-        JMenu menuColor = new JMenu("Color");
-        bar.add(menuColor);
-        JMenu menuDecor = new JMenu("Decor");
-        bar.add(menuDecor);
-        JMenu menuActiv = new JMenu("Activity");
-        bar.add(menuActiv);
-        JMenuItem fillShape = new JMenuItem("Fill");
-        JMenuItem noFillShape = new JMenuItem("NoFill");
-        menuFB.add(fillShape);
-        menuFB.add(noFillShape);
-        JMenuItem RectShape = new JMenuItem("Rectangle");
-        JMenuItem EllipseShape = new JMenuItem("Ellipse");
-        menuShape.add(RectShape);
-        menuShape.add(EllipseShape);
-        JMenuItem Red = new JMenuItem("Red");
-        JMenuItem Blue = new JMenuItem("Blue");
-        JMenuItem Green = new JMenuItem("Green");
-        JMenuItem Yellow = new JMenuItem("Yellow");
-        JMenuItem Black = new JMenuItem("Black");
-        JMenuItem Magenta = new JMenuItem("Magenta");
-        menuColor.add(Red);
-        menuColor.add(Blue);
-        menuColor.add(Green);
-        menuColor.add(Yellow);
-        menuColor.add(Black);
-        menuColor.add(Magenta);
-        JMenuItem jMenuDecor = new JMenuItem("Decor");
-        JMenuItem jMenuNoDecor = new JMenuItem("NoDecor");
-        menuDecor.add(jMenuDecor);
-        menuDecor.add(jMenuNoDecor);
-        JMenuItem jMenuDraw = new JMenuItem("Draw");
-        JMenuItem jMenuMove = new JMenuItem("Move");
-        menuActiv.add(jMenuDraw);
-        menuActiv.add(jMenuMove);
 
-        //FB listeners
-        fillShape.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setFb(MyShape.FillBehavior.FILL);
-            }
-        });
-        noFillShape.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setFb(MyShape.FillBehavior.NO_FILL);
-            }
-        });
-        //Shape listeners
-        RectShape.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setRectangularShape(new Rectangle2D.Double());
-            }
-        });
-        EllipseShape.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setRectangularShape(new Ellipse2D.Double());
-            }
-        });
-        //Color listeners
-        Red.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setColor(Color.red);
-            }
-        });
-        Blue.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setColor(Color.blue);
-            }
-        });
-        Green.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setColor(Color.green);
-            }
-        });
-        Yellow.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setColor(Color.yellow);
-            }
-        });
-        Black.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setColor(Color.black);
-            }
-        });
-        Magenta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setColor(Color.magenta);
-            }
-        });
-        //Decorator listeners
-        jMenuDecor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.Decor(state.getShape(), 10);
-            }
-        });
-        jMenuNoDecor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.NoDecor(state.getShape());
-            }
-        });
-        //Activity listeners
-        jMenuDraw.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setActivity(new Draw());
-            }
-        });
-        jMenuMove.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                state.setActivity(new Move());
-            }
-        });
+        ArrayList<Action> menuItems = new ArrayList<>();
+        menuItems.add(new SwitchState("Открыть",new ImageIcon("open.png"),
+                new OpenFile(state)));
+        menuItems.add(new SwitchState("Сохранить как", new ImageIcon("save.png"),
+                new SaveFile(state)));
+        menuItems.add(new SwitchState("Линия",new ImageIcon("line.png"),
+                new SwitchLine(state, new MyLine())));
+        menuItems.add(new SwitchState("Прямоугольник",new ImageIcon("rect.png"),
+                new SwitchShape(state, new Rectangle2D.Double())));
+        menuItems.add(new SwitchState("Овал", new ImageIcon("elipse.png"),
+                new SwitchShape(state, new Ellipse2D.Double())));
+        menuItems.add(new SwitchState("Залитая", new ImageIcon("fill.png"),
+                new SwitchFill(state, MyShape.FillBehavior.FILL)));
+        menuItems.add(new SwitchState("Незалитая", new ImageIcon("no_fill.png"),
+                new SwitchFill(state, MyShape.FillBehavior.NO_FILL)));
+        menuItems.add(new SwitchState("Декорированная", new ImageIcon("decor.png"),
+                new SwitchDecor(state, 10, true)));
+        menuItems.add(new SwitchState("Недекорированная", new ImageIcon("no_decor.png"),
+                new SwitchDecor(state, 0, false)));
+        menuItems.add(new SwitchState("Рисовать", new ImageIcon("draw.png"),
+                new SwitchActivity(state, new Draw())));
+        menuItems.add(new SwitchState("Двигать", new ImageIcon("move.png"),
+                new SwitchActivity(state, new Move())));
+        menuItems.add(new SwitchUndo("Назад",new ImageIcon("undo.png"),undoMachine));
+        menuItems.add(new SwitchRedo("Вперед",new ImageIcon("redo.png"),undoMachine));
+        menuItems.add(new SwitchState("Выбор цвета", new ImageIcon("color.png"),
+                new SwitchColor(state)));
+        undoMachine.addObserver((SwitchUndo)menuItems.get(menuItems.size()-3));
+        undoMachine.addObserver((SwitchRedo)menuItems.get(menuItems.size()-2));
+        undoMachine.notifyMenu();
+
+        JMenu menu = new JMenu("Файл");
+        bar.add(menu);
+        menu.add(menuItems.get(0));
+        menu.add(menuItems.get(1));
+
+        JToolBar toolBar = new JToolBar();
+        add(toolBar, BorderLayout.NORTH);
+        for (int i = 2; i < menuItems.size(); i++) {
+            toolBar.add(menuItems.get(i));
+        }
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 500);
+        setSize(900, 800);
         setVisible(true);
     }
 

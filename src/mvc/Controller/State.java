@@ -1,6 +1,7 @@
 package mvc.Controller;
 
 import mvc.model.Model;
+import mvc.model.decorator.MyLine;
 import mvc.model.decorator.MyShape;
 import mvc.model.decorator.ShapeDecorator;
 import java.awt.Color;
@@ -18,6 +19,10 @@ public class State {
 
     public State(Model model) {
         this.model = model;
+    }
+
+    public Model getModel(){
+        return this.model;
     }
 
     public void setShape(MyShape shape) {
@@ -41,6 +46,7 @@ public class State {
     }
 
     public void setRectangularShape(RectangularShape rectangularShape) {
+        this.shape = new MyShape();
         this.rectangularShape = rectangularShape;
         shape.setShape(rectangularShape);
         model.setMyShape(shape);
@@ -65,5 +71,10 @@ public class State {
 
     public Activity getActivity() {
         return activity;
+    }
+
+    public void line(){
+        this.shape = new MyLine();
+        model.setMyShape(shape);
     }
 }

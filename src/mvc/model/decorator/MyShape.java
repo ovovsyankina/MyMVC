@@ -3,11 +3,13 @@ package mvc.model.decorator;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
+import java.io.Serializable;
 
-public class MyShape implements ShapeDecorator {
+public class MyShape implements ShapeDecorator, Serializable {
 
     Color color;
     RectangularShape shape;
@@ -15,12 +17,12 @@ public class MyShape implements ShapeDecorator {
 
     public MyShape(RectangularShape shape) {
         this.shape = shape;
-        color = Color.BLUE;
+        color = Color.black;
         fb = FillBehavior.NO_FILL;
     }
 
     public MyShape() {
-        color = Color.BLUE;
+        color = Color.black;
         shape = new Rectangle2D.Double();
         fb =  FillBehavior.NO_FILL;;
     }
@@ -78,6 +80,8 @@ public class MyShape implements ShapeDecorator {
         return s;
     }
 
+    @Override
+    public void setLine(Line2D r){};
 
     public enum FillBehavior {
         FILL {

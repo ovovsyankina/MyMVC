@@ -11,6 +11,7 @@ import mvc.model.activity.Activity;
 import mvc.view.MyFrame;
 import mvc.view.MyPanel;
 import java.awt.Color;
+import mvc.model.UndoMachine;
 
 
 public class Controller {
@@ -19,9 +20,11 @@ public class Controller {
     MyPanel panel;
     Point2D [] pointsArray;
     State state;
+    UndoMachine undoMachine;
 
     public Controller() {
         model = new Model();
+        undoMachine = new UndoMachine();
         state = new State(model);
         state.setShape(new MyShape(new Rectangle2D.Double()));
         state.setColor(Color.black);
@@ -29,13 +32,14 @@ public class Controller {
         panel = new MyPanel();
         panel.setController(this);
         model.addObserver(panel);
-        frame = new MyFrame(state);
+        frame = new MyFrame(state, undoMachine);
         frame.setPanel(panel);
         pointsArray = new Point2D[2];
     }
     public void getPointOne(Point2D p){
         Activity activity = state.getActivity();
         activity.getPointOne(p);
+        undoMachine.add(activity.clone());
     }
     public void getPointTwo(Point2D p){
         state.getActivity().getPointTwo(p);
