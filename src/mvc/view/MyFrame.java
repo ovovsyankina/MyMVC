@@ -57,10 +57,33 @@ public class MyFrame extends JFrame {
         undoMachine.addObserver((SwitchRedo)menuItems.get(menuItems.size()-2));
         undoMachine.notifyMenu();
 
-        JMenu menu = new JMenu("Файл");
-        bar.add(menu);
-        menu.add(menuItems.get(0));
-        menu.add(menuItems.get(1));
+        JMenu fileMenu = new JMenu("Файл");
+        bar.add(fileMenu);
+        fileMenu.add(menuItems.get(0));
+        fileMenu.add(menuItems.get(1));
+
+        JMenu shapeMenu = new JMenu("Фигура");
+        bar.add(shapeMenu);
+        for (int i = 2; i <= 4; i++){
+            shapeMenu.add(menuItems.get(i));
+        }
+        ArrayList<JMenu> list = new ArrayList<JMenu>();
+        list.add(new JMenu("Заливка"));
+        list.add(new JMenu("Декор"));
+        list.add(new JMenu("Действие"));
+        list.add(new JMenu("Назад/вперед"));
+        int j = 5;
+        for(JMenu el : list) {
+            if(j < menuItems.size() - 2) {
+                bar.add(el);
+                el.add(menuItems.get(j));
+                el.add(menuItems.get(j + 1));
+                j = j + 2;
+            }
+        }
+        JMenu colorMenu = new JMenu("Выбор цвета");
+        bar.add(colorMenu);
+        colorMenu.add(menuItems.get(13));
 
         JToolBar toolBar = new JToolBar();
         add(toolBar, BorderLayout.NORTH);
