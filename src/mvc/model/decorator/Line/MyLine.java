@@ -24,6 +24,26 @@ public abstract class MyLine extends RectangularShape {
             return y2;
         }
 
+        @Override
+        public double getMinX() {
+            return getX();
+        }
+
+        @Override
+        public double getMinY() {
+            return getY();
+        }
+
+        @Override
+        public double getMaxX() {
+            return getWidth();
+        }
+
+        @Override
+        public double getMaxY() {
+            return getHeight();
+        }
+
         public boolean isEmpty(){
             return (x1 == x2 && y1 == y2);
         }
@@ -41,6 +61,21 @@ public abstract class MyLine extends RectangularShape {
             y1 = p[0].getY();
             y2 = p[1].getY();
         };
+
+        @Override
+        public void setFrameFromDiagonal(double x, double y, double w, double h) {
+            x1 = x;
+            x2 = w;
+            y1 = y;
+            y2 = h;
+        }
+        @Override
+        public void setFrameFromDiagonal(Point2D d, Point2D p) {
+            x1 = d.getX();
+            x2 = p.getX();
+            y1 = d.getY();
+            y2 = p.getY();
+        }
 
         public Rectangle2D getBounds2D(){
             double x, y, w, h;
