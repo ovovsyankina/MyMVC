@@ -70,7 +70,5 @@ public class BorderDecorator implements ShapeDecorator, Serializable {
         return shape.contains(p);
     }
 
-    @Override
-    public void setLine(Line2D r){};
 }
 

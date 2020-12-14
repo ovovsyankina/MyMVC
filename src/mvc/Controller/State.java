@@ -1,7 +1,6 @@
 package mvc.Controller;
 
 import mvc.model.Model;
-import mvc.model.decorator.MyLine;
 import mvc.model.decorator.MyShape;
 import mvc.model.decorator.ShapeDecorator;
 import java.awt.Color;
@@ -73,8 +72,4 @@ public class State {
         return activity;
     }
 
-    public void line(){
-        this.shape = new MyLine();
-        model.setMyShape(shape);
-    }
 }

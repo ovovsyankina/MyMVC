@@ -13,7 +13,6 @@ public interface ShapeDecorator {
     void setFb(MyShape.FillBehavior f);
     void setShape(RectangularShape r);
     void setFrame(Point2D[] p);
-    void setLine(Line2D r);
     boolean contains(Point2D p);
 
     RectangularShape getShape();

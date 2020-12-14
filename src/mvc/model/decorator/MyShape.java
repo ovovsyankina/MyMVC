@@ -80,9 +80,6 @@ public class MyShape implements ShapeDecorator, Serializable {
         return s;
     }
 
-    @Override
-    public void setLine(Line2D r){};
-
     public enum FillBehavior {
         FILL {
             @Override

@@ -4,7 +4,7 @@ import menu.*;
 import mvc.Controller.State;
 import mvc.model.activity.Draw;
 import mvc.model.activity.Move;
-import mvc.model.decorator.MyLine;
+import mvc.model.decorator.Line.MyLine;
 import mvc.model.decorator.MyShape;
 import mvc.model.UndoMachine;
 
@@ -32,7 +32,7 @@ public class MyFrame extends JFrame {
         menuItems.add(new SwitchState("Сохранить как", new ImageIcon("save.png"),
                 new SaveFile(state)));
         menuItems.add(new SwitchState("Линия",new ImageIcon("line.png"),
-                new SwitchLine(state, new MyLine())));
+                new SwitchShape(state, new MyLine.Double())));
         menuItems.add(new SwitchState("Прямоугольник",new ImageIcon("rect.png"),
                 new SwitchShape(state, new Rectangle2D.Double())));
         menuItems.add(new SwitchState("Овал", new ImageIcon("elipse.png"),
