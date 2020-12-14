@@ -1,4 +1,4 @@
-package mvc.model.decorator.Line;
+package mvc.model.ShapeType.Line;
 
 import java.awt.geom.*;
 import java.io.Serializable;

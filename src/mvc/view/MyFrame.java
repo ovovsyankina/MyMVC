@@ -4,7 +4,7 @@ import menu.*;
 import mvc.Controller.State;
 import mvc.model.activity.Draw;
 import mvc.model.activity.Move;
-import mvc.model.decorator.Line.MyLine;
+import mvc.model.ShapeType.Line.MyLine;
 import mvc.model.decorator.MyShape;
 import mvc.model.UndoMachine;
 
