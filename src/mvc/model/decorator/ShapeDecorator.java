@@ -1,5 +1,7 @@
 package mvc.model.decorator;
 
+import mvc.model.ShapeType.ShapeInterface;
+
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 import java.awt.Color;
@@ -10,10 +12,10 @@ public interface ShapeDecorator {
     void setParametr(int p);
     void setColor(Color c);
     void setFb(MyShape.FillBehavior f);
-    void setShape(RectangularShape r);
+    void setShape(ShapeInterface r);
     void setFrame(Point2D[] p);
     boolean contains(Point2D p);
 
-    RectangularShape getShape();
+    ShapeInterface getShape();
     ShapeDecorator clone();
 }

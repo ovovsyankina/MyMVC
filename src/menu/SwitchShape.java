@@ -2,13 +2,14 @@ package menu;
 
 
 import mvc.Controller.State;
-import java.awt.geom.RectangularShape;
+import mvc.model.ShapeType.ShapeInterface;
+
 
 public class SwitchShape implements Command{
     State state;
-    RectangularShape rs;
+    ShapeInterface rs;
 
-    public SwitchShape(State state, RectangularShape rs) {
+    public SwitchShape(State state, ShapeInterface rs) {
         this.state = state;
         this.rs = rs;
     }

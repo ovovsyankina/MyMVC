@@ -2,9 +2,11 @@ package mvc.view;
 
 import menu.*;
 import mvc.Controller.State;
+import mvc.model.ShapeType.MyEllipse;
+import mvc.model.ShapeType.MyRectangle;
 import mvc.model.activity.Draw;
 import mvc.model.activity.Move;
-import mvc.model.ShapeType.Line.MyLine;
+import mvc.model.ShapeType.MyLine;
 import mvc.model.decorator.MyShape;
 import mvc.model.UndoMachine;
 
@@ -32,11 +34,11 @@ public class MyFrame extends JFrame {
         menuItems.add(new SwitchState("Сохранить как", new ImageIcon("save.png"),
                 new SaveFile(state)));
         menuItems.add(new SwitchState("Линия",new ImageIcon("line.png"),
-                new SwitchShape(state, new MyLine.Double())));
+                new SwitchShape(state, new MyLine())));
         menuItems.add(new SwitchState("Прямоугольник",new ImageIcon("rect.png"),
-                new SwitchShape(state, new Rectangle2D.Double())));
+                new SwitchShape(state, new MyRectangle())));
         menuItems.add(new SwitchState("Овал", new ImageIcon("elipse.png"),
-                new SwitchShape(state, new Ellipse2D.Double())));
+                new SwitchShape(state, new MyEllipse())));
         menuItems.add(new SwitchState("Залитая", new ImageIcon("fill.png"),
                 new SwitchFill(state, MyShape.FillBehavior.FILL)));
         menuItems.add(new SwitchState("Незалитая", new ImageIcon("no_fill.png"),

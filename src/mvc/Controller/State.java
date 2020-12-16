@@ -1,6 +1,7 @@
 package mvc.Controller;
 
 import mvc.model.Model;
+import mvc.model.ShapeType.ShapeInterface;
 import mvc.model.decorator.MyShape;
 import mvc.model.decorator.ShapeDecorator;
 import java.awt.Color;
@@ -13,7 +14,7 @@ public class State {
     ShapeDecorator shape;
     Color color;
     MyShape.FillBehavior fb;
-    RectangularShape rectangularShape;
+    ShapeInterface rectangularShape;
     Activity activity;
 
     public State(Model model) {
@@ -44,7 +45,7 @@ public class State {
         model.setMyShape(shape);
     }
 
-    public void setRectangularShape(RectangularShape rectangularShape) {
+    public void setRectangularShape(ShapeInterface rectangularShape) {
         this.shape = new MyShape();
         this.rectangularShape = rectangularShape;
         shape.setShape(rectangularShape);

@@ -5,6 +5,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import mvc.model.Model;
+import mvc.model.ShapeType.MyRectangle;
 import mvc.model.activity.Draw;
 import mvc.model.decorator.MyShape;
 import mvc.model.activity.Activity;
@@ -26,7 +27,7 @@ public class Controller {
         model = new Model();
         undoMachine = new UndoMachine();
         state = new State(model);
-        state.setShape(new MyShape(new Rectangle2D.Double()));
+        state.setShape(new MyShape(new MyRectangle()));
         state.setColor(Color.black);
         state.setActivity(new Draw());
         panel = new MyPanel();

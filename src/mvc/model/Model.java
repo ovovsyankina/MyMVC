@@ -1,5 +1,6 @@
 package mvc.model;
 
+import mvc.model.ShapeType.ShapeInterface;
 import mvc.model.decorator.ShapeDecorator;
 
 import java.awt.Graphics2D;
@@ -68,12 +69,12 @@ public class Model extends Observable {
         double deltaX = p[0].getX() - p[1].getX();
         double deltaY = p[0].getY() - p[1].getY();
         if (currentShape != null) {
-            RectangularShape s = currentShape.getShape();
+            ShapeInterface s = currentShape.getShape();
             double xMin = s.getMinX() - deltaX;
             double yMin = s.getMinY() - deltaY;
             double xMax = s.getMaxX() - deltaX;
             double yMax = s.getMaxY() - deltaY;
-            s.setFrameFromDiagonal(xMin, yMin, xMax, yMax);
+            s.mySetFrameFromDiagonal(xMin, yMin, xMax, yMax);
             p[0] = p[1];
             setChanged();
             notifyObservers();
