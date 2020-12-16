@@ -7,12 +7,10 @@ import mvc.model.ShapeType.MyRectangle;
 import mvc.model.activity.Draw;
 import mvc.model.activity.Move;
 import mvc.model.ShapeType.MyLine;
-import mvc.model.decorator.MyShape;
+import mvc.model.MyShape;
 import mvc.model.UndoMachine;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import javax.swing.*;
 

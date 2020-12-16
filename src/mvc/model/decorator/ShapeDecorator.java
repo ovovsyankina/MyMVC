@@ -1,9 +1,9 @@
 package mvc.model.decorator;
 
+import mvc.model.MyShape;
 import mvc.model.ShapeType.ShapeInterface;
 
 import java.awt.geom.Point2D;
-import java.awt.geom.RectangularShape;
 import java.awt.Color;
 import java.awt.Graphics2D;
 

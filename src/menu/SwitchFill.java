@@ -1,7 +1,7 @@
 package menu;
 
 import mvc.Controller.State;
-import mvc.model.decorator.MyShape;
+import mvc.model.MyShape;
 
 public class SwitchFill implements Command{
     State state;

@@ -2,10 +2,10 @@ package mvc.Controller;
 
 import mvc.model.Model;
 import mvc.model.ShapeType.ShapeInterface;
-import mvc.model.decorator.MyShape;
+import mvc.model.MyShape;
 import mvc.model.decorator.ShapeDecorator;
 import java.awt.Color;
-import java.awt.geom.RectangularShape;
+
 import mvc.model.decorator.BorderDecorator;
 import mvc.model.activity.Activity;
 

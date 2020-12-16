@@ -2,12 +2,11 @@ package mvc.Controller;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 
 import mvc.model.Model;
 import mvc.model.ShapeType.MyRectangle;
 import mvc.model.activity.Draw;
-import mvc.model.decorator.MyShape;
+import mvc.model.MyShape;
 import mvc.model.activity.Activity;
 import mvc.view.MyFrame;
 import mvc.view.MyPanel;
