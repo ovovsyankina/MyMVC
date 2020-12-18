@@ -8,6 +8,7 @@ import java.awt.Color;
 
 import mvc.model.decorator.BorderDecorator;
 import mvc.model.activity.Activity;
+import mvc.model.decorator.XLineDecorator;
 
 public class State {
     Model model;
@@ -57,6 +58,11 @@ public class State {
         shape.setParametr(p);
         shape = new BorderDecorator(shape);
         shape.setParametr(p+20);
+        model.setMyShape(shape);
+    }
+
+    public void XDecor(ShapeDecorator shape){
+        shape = new XLineDecorator(shape);
         model.setMyShape(shape);
     }
 

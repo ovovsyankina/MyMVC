@@ -37,14 +37,16 @@ public class MyFrame extends JFrame {
                 new SwitchShape(state, new MyRectangle())));
         menuItems.add(new SwitchState("Овал", new ImageIcon("elipse.png"),
                 new SwitchShape(state, new MyEllipse())));
+        menuItems.add(new SwitchState("Декор рамка", new ImageIcon("decor.png"),
+                new SwitchDecor(state, 10, 1, true)));
+        menuItems.add(new SwitchState("Декор крест", new ImageIcon("xDecor.png"),
+                new SwitchDecor(state, 0, 2, true)));
+        menuItems.add(new SwitchState("Недекорированная", new ImageIcon("no_decor.png"),
+                new SwitchDecor(state, 0, 0, false)));
         menuItems.add(new SwitchState("Залитая", new ImageIcon("fill.png"),
                 new SwitchFill(state, MyShape.FillBehavior.FILL)));
         menuItems.add(new SwitchState("Незалитая", new ImageIcon("no_fill.png"),
                 new SwitchFill(state, MyShape.FillBehavior.NO_FILL)));
-        menuItems.add(new SwitchState("Декорированная", new ImageIcon("decor.png"),
-                new SwitchDecor(state, 10, true)));
-        menuItems.add(new SwitchState("Недекорированная", new ImageIcon("no_decor.png"),
-                new SwitchDecor(state, 0, false)));
         menuItems.add(new SwitchState("Рисовать", new ImageIcon("draw.png"),
                 new SwitchActivity(state, new Draw())));
         menuItems.add(new SwitchState("Двигать", new ImageIcon("move.png"),
@@ -67,12 +69,16 @@ public class MyFrame extends JFrame {
         for (int i = 2; i <= 4; i++){
             shapeMenu.add(menuItems.get(i));
         }
+        JMenu decorMenu = new JMenu("Декор");
+        bar.add(decorMenu);
+        for (int i = 5; i <= 7; i++){
+            decorMenu.add(menuItems.get(i));
+        }
         ArrayList<JMenu> list = new ArrayList<JMenu>();
         list.add(new JMenu("Заливка"));
-        list.add(new JMenu("Декор"));
         list.add(new JMenu("Действие"));
         list.add(new JMenu("Назад/вперед"));
-        int j = 5;
+        int j = 8;
         for(JMenu el : list) {
             if(j < menuItems.size() - 2) {
                 bar.add(el);
@@ -83,7 +89,7 @@ public class MyFrame extends JFrame {
         }
         JMenu colorMenu = new JMenu("Выбор цвета");
         bar.add(colorMenu);
-        colorMenu.add(menuItems.get(13));
+        colorMenu.add(menuItems.get(14));
 
         JToolBar toolBar = new JToolBar();
         add(toolBar, BorderLayout.NORTH);
@@ -92,7 +98,7 @@ public class MyFrame extends JFrame {
         }
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(900, 800);
+        setSize(1000, 800);
         setVisible(true);
     }
 
