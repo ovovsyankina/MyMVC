@@ -24,9 +24,17 @@ public class Model extends Observable {
     ShapeDecorator currentShape;
     ShapeDecorator sampleShape;
     ArrayList<ShapeDecorator> list;
+    private static Model model;
 
-    public Model() {
+    private Model() {
         list = new ArrayList<>();
+    }
+
+    public static synchronized Model getInstance(){
+        if (model == null){
+            model = new Model();
+        }
+        return model;
     }
 
     public ShapeDecorator initCurrentShape() {

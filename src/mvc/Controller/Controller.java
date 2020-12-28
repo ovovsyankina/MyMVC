@@ -23,7 +23,7 @@ public class Controller {
     UndoMachine undoMachine;
 
     public Controller() {
-        model = new Model();
+        model = Model.getInstance();
         undoMachine = new UndoMachine();
         state = new State(model);
         state.setShape(new MyShape(new MyRectangle()));
